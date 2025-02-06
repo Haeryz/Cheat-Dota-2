@@ -4,20 +4,7 @@ import warnings
 from pymem import Pymem
 from pymem.process import module_from_name
 
-# Suppress PyTorch warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
-
-def verify_cuda():
-    if not torch.cuda.is_available():
-        print("CUDA is not available. Please check your installation:")
-        print("1. Run: pip uninstall torch torchvision")
-        print("2. Run: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121")
-        return False
-    print(f"CUDA available: {torch.cuda.get_device_name(0)}")
-    return True
-
-if not verify_cuda():
-    raise RuntimeError("CUDA initialization failed")
 
 class Dota2Memory:
     def __init__(self):
@@ -67,7 +54,7 @@ def main():
                 print(f"Sent keyboard input: {armlet_button}")
                 time.sleep(cooldown)
             
-            time.sleep(0.01)  # Small delay to prevent excessive CPU usage
+            time.sleep(0.01)
             
     except KeyboardInterrupt:
         print("\nProgram terminated by user")
